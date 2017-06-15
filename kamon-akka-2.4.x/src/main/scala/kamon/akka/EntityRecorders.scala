@@ -77,3 +77,11 @@ class ActorGroupMetrics(instrumentFactory: InstrumentFactory) extends GenericEnt
 }
 
 object ActorGroupMetrics extends EntityRecorderFactoryCompanion[ActorGroupMetrics]("akka-actor-group", new ActorGroupMetrics(_))
+
+
+class StageMetrics(instrumentFactory: InstrumentFactory) extends GenericEntityRecorder(instrumentFactory) {
+  val processingTime = histogram("processing-time", Time.Nanoseconds)
+  
+}
+
+object StageMetrics extends EntityRecorderFactoryCompanion[StageMetrics]("akka-graph-logic", new StageMetrics(_))

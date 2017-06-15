@@ -14,6 +14,10 @@
     <aspect name="akka.kamon.instrumentation.RoutedActorCellInstrumentation"/>
     <aspect name="akka.kamon.instrumentation.ActorLoggingInstrumentation"/>
 
+    <!-- Streams -->
+    <aspect name="akka.kamon.instrumentation.GraphLogicInstrumentation"/>
+    <aspect name="akka.kamon.instrumentation.MetricsIntoGraphLogicMixin" />
+
     <!-- Dispatchers -->
     <aspect name="akka.kamon.instrumentation.DispatcherInstrumentation"/>
     <aspect name="akka.kamon.instrumentation.DispatcherMetricCollectionInfoIntoDispatcherMixin"/>

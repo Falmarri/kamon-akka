@@ -49,12 +49,12 @@ lazy val kamonAkka24 = Project("kamon-akka-24", file("kamon-akka-2.4.x"))
   .settings(Seq(
       bintrayPackage := "kamon-akka",
       moduleName := "kamon-akka-2.4",
-      scalaVersion := "2.12.1",
-      crossScalaVersions := Seq("2.11.8", "2.12.1")))
+      scalaVersion := "2.11.11",
+      crossScalaVersions := Seq("2.11.11", "2.12.1")))
   .settings(aspectJSettings: _*)
   .settings(
     libraryDependencies ++=
-      compileScope(akkaDependency("actor", `akka-2.4`), kamonCore, kamonScala) ++
+      compileScope(akkaDependency("actor", `akka-2.4`), akkaDependency("stream", `akka-2.4`), kamonCore, kamonScala) ++
       providedScope(aspectJ) ++
       optionalScope(logbackClassic) ++
       testScope(scalatest, akkaDependency("testkit", `akka-2.4`), akkaDependency("slf4j", `akka-2.4`), logbackClassic))
@@ -64,15 +64,15 @@ lazy val kamonAkka25 = Project("kamon-akka-25", file("kamon-akka-2.5.x"))
   .settings(Seq(
     bintrayPackage := "kamon-akka",
     moduleName := "kamon-akka-2.5",
-    scalaVersion := "2.12.1",
+    scalaVersion := "2.11.11",
     crossScalaVersions := Seq("2.11.8", "2.12.1")))
   .settings(aspectJSettings: _*)
   .settings(
     libraryDependencies ++=
-      compileScope(akkaDependency("actor", `akka-2.5`), kamonCore, kamonScala) ++
+      compileScope(akkaDependency("actor", `akka-2.5`), akkaDependency("stream", `akka-2.5`), kamonCore, kamonScala) ++
         providedScope(aspectJ) ++
         optionalScope(logbackClassic) ++
-        testScope(scalatest, akkaDependency("testkit", `akka-2.5`), akkaDependency("slf4j", `akka-2.5`), logbackClassic))
+        testScope(scalatest, akkaDependency("testkit", `akka-2.5`), akkaDependency("stream", `akka-2.5`), akkaDependency("slf4j", `akka-2.5`), logbackClassic))
 
 
 

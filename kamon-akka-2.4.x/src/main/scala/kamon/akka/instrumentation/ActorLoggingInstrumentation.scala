@@ -24,27 +24,27 @@ import org.aspectj.lang.annotation._
 @Aspect
 class ActorLoggingInstrumentation extends MdcKeysSupport {
 
-  @DeclareMixin("akka.event.Logging.LogEvent+")
-  def mixinTraceContextAwareToLogEvent: TraceContextAware = TraceContextAware.default
-
-  @Pointcut("execution(akka.event.Logging.LogEvent+.new(..)) && this(event)")
-  def logEventCreation(event: TraceContextAware): Unit = {}
-
-  @After("logEventCreation(event)")
-  def captureTraceContext(event: TraceContextAware): Unit = {
-    // Force initialization of TraceContextAware
-    event.traceContext
-  }
-
-  @Pointcut("execution(* akka.event.slf4j.Slf4jLogger.withMdc(..)) && args(logSource, logEvent, logStatement)")
-  def withMdcInvocation(logSource: String, logEvent: TraceContextAware, logStatement: () ⇒ _): Unit = {}
-
-  @Around("withMdcInvocation(logSource, logEvent, logStatement)")
-  def aroundWithMdcInvocation(pjp: ProceedingJoinPoint, logSource: String, logEvent: TraceContextAware, logStatement: () ⇒ _): Unit = {
-    Tracer.withContext(logEvent.traceContext) {
-      withMdc {
-        pjp.proceed()
-      }
-    }
-  }
+//  @DeclareMixin("akka.event.Logging.LogEvent+")
+//  def mixinTraceContextAwareToLogEvent: TraceContextAware = TraceContextAware.default
+//
+//  @Pointcut("execution(akka.event.Logging.LogEvent+.new(..)) && this(event)")
+//  def logEventCreation(event: TraceContextAware): Unit = {}
+//
+//  @After("logEventCreation(event)")
+//  def captureTraceContext(event: TraceContextAware): Unit = {
+//    // Force initialization of TraceContextAware
+//    event.traceContext
+//  }
+//
+//  @Pointcut("execution(* akka.event.slf4j.Slf4jLogger.withMdc(..)) && args(logSource, logEvent, logStatement)")
+//  def withMdcInvocation(logSource: String, logEvent: TraceContextAware, logStatement: () ⇒ _): Unit = {}
+//
+//  @Around("withMdcInvocation(logSource, logEvent, logStatement)")
+//  def aroundWithMdcInvocation(pjp: ProceedingJoinPoint, logSource: String, logEvent: TraceContextAware, logStatement: () ⇒ _): Unit = {
+//    Tracer.withContext(logEvent.traceContext) {
+//      withMdc {
+//        pjp.proceed()
+//      }
+//    }
+//  }
 }
